@@ -1,4 +1,4 @@
-bFinder 🌍
+# bFinder 🌍
 (under development)
 bFinder is a mobile application that helps users discover nearby businesses based on their current location, delivering a seamless experience for real-time exploration.
 
