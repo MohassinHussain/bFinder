@@ -55,7 +55,7 @@ export default function TabLayout() {
           }}
         />
 
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="SavedPlaces"
           options={{
             tabBarLabel: "Saved",
@@ -64,6 +64,19 @@ export default function TabLayout() {
             },
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="list-alt" size={wp(7)} color="black" />
+            ),
+            tabBarActiveBackgroundColor: "#FFFADA",
+          }}
+        /> */}
+        <Tabs.Screen
+          name="Featured"
+          options={{
+            tabBarLabel: "Featured",
+            tabBarLabelStyle: {
+              display: "none",
+            },
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="auto-fix-high" size={wp(7)} color="black" />
             ),
             tabBarActiveBackgroundColor: "#FFFADA",
           }}

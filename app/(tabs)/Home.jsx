@@ -26,8 +26,11 @@ import * as Location from "expo-location";
 import { LoginContext } from "../../components/Contexts/LoginContext";
 import { useContext } from "react";
 import { useUser } from "@clerk/clerk-expo";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
+  const navigation = useNavigation();
+
   const { userName } = useContext(LoginContext);
 
   const [position, setPosition] = useState();
@@ -81,15 +84,15 @@ export default function Home() {
       </View>
       <ScrollView scrollEnabled={true} horizontal>
         <Image
-          source={require("../../assets/images/image.webp")}
+          source={require("../../assets/images/place2.jpeg")}
           style={styles.sliderImage}
         />
         <Image
-          source={require("../../assets/images/image.webp")}
+          source={require("../../assets/images/place1.jpeg")}
           style={styles.sliderImage}
         />
         <Image
-          source={require("../../assets/images/image.webp")}
+          source={require("../../assets/images/place3.jpeg")}
           style={styles.sliderImage}
         />
         <Image
@@ -109,6 +112,7 @@ export default function Home() {
               fontSize: wp(4),
               padding: wp(2),
             }}
+            onPress={() => navigation.navigate("Featured")}
           >
             Explore more featured
           </Text>
@@ -137,6 +141,8 @@ export default function Home() {
           showsBuildings={true}
           scrollDuringRotateOrZoomEnabled={true}
           toolbarEnabled={true}
+          zoomControlEnabled={true}
+          zoomTapEnabled={true}
           onPress={(event) => {
             {
               const { latitude, longitude } = event.nativeEvent.coordinate;
@@ -176,7 +182,7 @@ const styles = StyleSheet.create({
   },
   sliderImage: {
     width: wp(100),
-    height: hp(20),
+    height: hp(25),
     margin: wp(2),
     borderRadius: wp(3),
   },
