@@ -1,50 +1,25 @@
-# Welcome to your Expo app 👋
+# bFinder 🌍
+(under development)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+bFinder is a mobile application that helps users discover nearby businesses based on their current location, delivering a seamless experience for real-time exploration.
 
-## Get started
+## 📱 About the App
+bFinder is designed to provide users with personalized location-based recommendations. Whether you're looking for restaurants, parks, or any place of interest, bFinder gives you real-time data and the best results tailored to your current location.
 
-1. Install dependencies
+Built using the latest tech stack, bFinder integrates Google Maps, Firebase, PostgreSQL, and Clerk to deliver a user-friendly experience with secure authentication and real-time updates.
 
-   ```bash
-   npm install
-   ```
+## 🚀 Features
+- **Real-time Location Tracking**: Uses Google Maps to get the user's current latitude and longitude.
+- **Nearby Places**: Fetches places near the user based on their current location.
+- **Firebase Integration**: Real-time data storage and retrieval, ensuring you always have the most updated information.
+- **Secure Authentication**: User authentication and analytics handled by Clerk.
+- **PostgreSQL as Primary Database**: Flexible and powerful database management for handling dynamic queries.
+- **Sleek UI**: Built with React Native (Expo) to deliver a smooth and native-like experience.
 
-2. Start the app
-
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🛠️ Tech Stack
+- **Frontend**: React Native (Expo)
+- **Real-Time Database**: Firebase
+- **Primary Database**: PostgreSQL
+- **Authentication & Analytics**: Clerk
+- **Maps Integration**: Google Maps API
+- **Backend**: Node.js (optional if backend is in use)
