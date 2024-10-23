@@ -28,6 +28,10 @@ import { useContext } from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { useNavigation } from "@react-navigation/native";
 
+import { SearchPlace } from "@/components/SearchPlace";
+
+import { LinearGradient } from "expo-linear-gradient";
+
 export default function Home() {
   const navigation = useNavigation();
 
@@ -64,114 +68,123 @@ export default function Home() {
   }, []);
   const { user } = useUser();
   return (
-    <ScrollView>
-      {/* <StatusBar barStyle="light-content" backgroundColor="black" /> */}
-      <View style={styles.mainContainer}>
-        <Text style={{ fontSize: wp(9) }}>
-          Welcome to Myapp, {user.fullName}!
-        </Text>
-      </View>
-      <View style={{ marginLeft: wp(3), marginTop: hp(4) }}>
-        <Text
-          style={{
-            // fontFamily: "opensans-normal",
-            fontSize: wp(6),
-            fontWeight: "bold",
-          }}
-        >
-          Featured
-        </Text>
-      </View>
-      <ScrollView scrollEnabled={true} horizontal>
-        <Image
-          source={require("../../assets/images/place2.jpeg")}
-          style={styles.sliderImage}
-        />
-        <Image
-          source={require("../../assets/images/place1.jpeg")}
-          style={styles.sliderImage}
-        />
-        <Image
-          source={require("../../assets/images/place3.jpeg")}
-          style={styles.sliderImage}
-        />
-        <Image
-          source={require("../../assets/images/image.webp")}
-          style={styles.sliderImage}
-        />
-      </ScrollView>
-      <View style={{ flex: 1, alignItems: "center" }}>
-        <TouchableOpacity
-          style={{ backgroundColor: "skyblue", borderRadius: wp(3) }}
-        >
+    <LinearGradient
+      colors={["#9198e5", "#e66465"]} // Set your gradient colors
+      style={styles.gradient} // Apply gradient styles
+    >
+      <ScrollView>
+        {/* <StatusBar barStyle="light-content" backgroundColor="black" /> */}
+        <View style={styles.mainContainer}>
+          <Text style={{ fontSize: wp(9) }}>
+            Welcome to Myapp, {user.fullName}!
+          </Text>
+        </View>
+        <View style={{ marginLeft: wp(3), marginTop: hp(4) }}>
           <Text
             style={{
               // fontFamily: "opensans-normal",
-              color: "black",
-              fontWeight: "semibold",
-              fontSize: wp(4),
-              padding: wp(2),
+              fontSize: wp(6),
+              fontWeight: "bold",
             }}
-            onPress={() => navigation.navigate("Featured")}
           >
-            Explore more featured
+            Featured
           </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ marginLeft: wp(3) }}>
-        <Text
-          style={{
-            // fontFamily: "opensans-normal",
-            fontWeight: "bold",
-            fontSize: wp(6),
-          }}
-        >
-          Maps
-        </Text>
-        <MapView
-          // mapType="satellite"
-          userInterfaceStyle="light"
-          showsUserLocation={true}
-          userLocationPriority="high"
-          // userLocationUpdateInterval="1000"
-          showsMyLocationButton={true}
-          showsCompass={true}
-          showsTraffic={true}
-          showsIndoors={true}
-          showsBuildings={true}
-          scrollDuringRotateOrZoomEnabled={true}
-          toolbarEnabled={true}
-          zoomControlEnabled={true}
-          zoomTapEnabled={true}
-          onPress={(event) => {
-            {
-              const { latitude, longitude } = event.nativeEvent.coordinate;
-              console.log("Latitude:", latitude);
-              console.log("Longitude:", longitude);
-              setLat(latitude);
-              setLong(longitude);
-            }
-          }}
-          style={{
-            marginLeft: wp(2),
-            width: wp(90),
+        </View>
+        <ScrollView scrollEnabled={true} horizontal>
+          <Image
+            source={require("../../assets/images/place2.jpeg")}
+            style={styles.sliderImage}
+          />
+          <Image
+            source={require("../../assets/images/place1.jpeg")}
+            style={styles.sliderImage}
+          />
+          <Image
+            source={require("../../assets/images/place3.jpeg")}
+            style={styles.sliderImage}
+          />
+          <Image
+            source={require("../../assets/images/image.webp")}
+            style={styles.sliderImage}
+          />
+        </ScrollView>
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity
+            style={{ backgroundColor: "skyblue", borderRadius: wp(3) }}
+          >
+            <Text
+              style={{
+                // fontFamily: "opensans-normal",
+                color: "black",
+                fontWeight: "semibold",
+                fontSize: wp(4),
+                padding: wp(2),
+              }}
+              onPress={() => navigation.navigate("Featured")}
+            >
+              Explore more featured
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-            height: hp(40),
-          }}
-        >
-          <Marker
-            coordinate={{
-              latitude: lat,
-              longitude: long,
+        <SearchPlace />
+
+        <View style={{ marginLeft: wp(3) }}>
+          <Text
+            style={{
+              // fontFamily: "opensans-normal",
+              fontWeight: "bold",
+              fontSize: wp(6),
             }}
           >
-            <View>
-              <Entypo name="location-pin" size={24} color="red" />
-            </View>
-          </Marker>
-        </MapView>
-      </View>
-    </ScrollView>
+            Maps
+          </Text>
+          <MapView
+            // mapType="satellite"
+            userInterfaceStyle="light"
+            showsUserLocation={true}
+            userLocationPriority="high"
+            // userLocationUpdateInterval="1000"
+            showsMyLocationButton={true}
+            showsCompass={true}
+            showsTraffic={true}
+            showsIndoors={true}
+            showsBuildings={true}
+            scrollDuringRotateOrZoomEnabled={true}
+            toolbarEnabled={true}
+            zoomControlEnabled={true}
+            zoomTapEnabled={true}
+            onPress={(event) => {
+              {
+                const { latitude, longitude } = event.nativeEvent.coordinate;
+                console.log("Latitude:", latitude);
+                console.log("Longitude:", longitude);
+                setLat(latitude);
+                setLong(longitude);
+              }
+            }}
+            style={{
+              marginLeft: wp(2),
+              width: wp(90),
+
+              height: hp(40),
+            }}
+          >
+            <Marker
+              coordinate={{
+                latitude: lat,
+                longitude: long,
+              }}
+            >
+              <View>
+                <Entypo name="location-pin" size={24} color="red" />
+              </View>
+            </Marker>
+          </MapView>
+          <Text>HELLo</Text>
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 }
 

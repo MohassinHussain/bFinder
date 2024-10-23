@@ -15,18 +15,16 @@ import {
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useUser } from "@clerk/clerk-expo";
 import { db } from "../../config";
-import { ref, onValue } from "firebase/database";
-import { useDispatch } from "react-redux";
-// import { addPlaceToSaved } from "../../redux/savedPlacesSlice";
+import { ref, onValue, remove } from "firebase/database";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Explore = () => {
-  // const dispatch = useDispatch();
   const { user } = useUser();
   const [places, setPlaces] = useState([]);
   const [isVisible, setIsVisible] = useState(false);
   const [fetchedPlaces, setFetchedPlaces] = useState([]);
-  const [likedPlaces, setLikedPlaces] = useState({}); // To track liked places
+  const [likedPlaces, setLikedPlaces] = useState({});
+  const [deleteConfirmData, setDeleteConfirmData] = useState(null);
 
   useEffect(() => {
     const loadLikedPlaces = async () => {
@@ -57,12 +55,11 @@ const Explore = () => {
     setLikedPlaces((prev) => {
       const newLikedPlaces = { ...prev };
       if (newLikedPlaces[placeId]) {
-        delete newLikedPlaces[placeId]; // Remove if already liked
+        delete newLikedPlaces[placeId];
       } else {
-        newLikedPlaces[placeId] = data; // Add to liked places
+        newLikedPlaces[placeId] = data;
       }
 
-      // Save liked places to AsyncStorage
       AsyncStorage.setItem("likedPlaces", JSON.stringify(newLikedPlaces)).catch(
         (error) => {
           console.error("Failed to save liked places", error);
@@ -71,6 +68,21 @@ const Explore = () => {
 
       return newLikedPlaces;
     });
+  };
+
+  const handleDeletePlace = async (placeId) => {
+    try {
+      const placeRef = ref(db, `places/${placeId}`);
+      await remove(placeRef);
+
+      setFetchedPlaces((prevPlaces) =>
+        prevPlaces.filter((place) => place.id !== placeId)
+      );
+
+      setDeleteConfirmData(null);
+    } catch (error) {
+      console.error("Failed to delete place:", error);
+    }
   };
 
   return (
@@ -84,8 +96,51 @@ const Explore = () => {
         {fetchedPlaces.map((data) => (
           <View key={data.id} style={styles.placeContainer}>
             <View>
+              <Modal
+                animationType="fade"
+                visible={!!deleteConfirmData} // Show if deleteConfirmData is set
+                onRequestClose={() => setDeleteConfirmData(null)} // Close when user cancels
+              >
+                <View style={styles.modalContainer}>
+                  <Text style={styles.modalText}>
+                    Are you sure you want to delete this place,
+                    {deleteConfirmData?.placeName}?
+                  </Text>
+
+                  <View style={styles.modalButtons}>
+                    <TouchableOpacity
+                      style={styles.confirmButton}
+                      onPress={() => handleDeletePlace(deleteConfirmData?.id)}
+                    >
+                      <Text style={styles.modalButtonText}>Confirm</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.cancelButton}
+                      onPress={() => setDeleteConfirmData(null)}
+                    >
+                      <Text style={styles.modalButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+              {user.fullName === data.placeAdderName && (
+                <TouchableOpacity
+                  style={styles.deleteButton}
+                  onPress={() =>
+                    setDeleteConfirmData({
+                      id: data.id,
+                      placeName: data.placeName,
+                    })
+                  } // Save place ID and name to delete
+                >
+                  <FontAwesome6 name="trash" size={hp(3)} color="black" />
+                </TouchableOpacity>
+              )}
+
               <Text style={{ color: "red", fontSize: hp(2) }}>
                 Place added By: {data.placeAdderName}
+                {user.fullName === data.placeAdderName && " (YOU)"}
               </Text>
               <Text style={styles.mainDisplayTexts}>
                 Place name: {data.placeName}
@@ -167,6 +222,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: wp(2),
   },
+  deleteButton: {
+    alignItems: "flex-end",
+  },
   addButton: {
     backgroundColor: "black",
     padding: wp(2),
@@ -178,6 +236,35 @@ const styles = StyleSheet.create({
   },
   subDisplayTexts: {
     fontSize: wp(5),
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalText: {
+    fontSize: wp(5),
+    color: "white",
+    marginBottom: hp(2),
+  },
+  modalButtons: {
+    flexDirection: "row",
+  },
+  confirmButton: {
+    backgroundColor: "red",
+    padding: wp(3),
+    marginRight: wp(2),
+    borderRadius: wp(3),
+  },
+  cancelButton: {
+    backgroundColor: "grey",
+    padding: wp(3),
+    borderRadius: wp(3),
+  },
+  modalButtonText: {
+    color: "white",
+    fontSize: wp(4),
   },
 });
 
