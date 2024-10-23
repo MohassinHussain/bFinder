@@ -12,7 +12,7 @@ export const SearchPlace = () => {
   //   const fetchPlaces = async (query) => {
   //     try {
   //       const response = await fetch(
-  //         `https://api.example.com/places?query=${query}&key=AIzaSyCP_O4b4o0ZQmUq2S5siw_Cn3EE4Eu8M48`
+  //         `https://api.example.com/places?query=${query}&key=<API_KEY>`
   //       );
   //       const data = await response.json();
   //       console.log(data);
@@ -78,5 +78,3 @@ const styles = StyleSheet.create({
     marginRight: wp(2),
   },
 });
-
-// AIzaSyCP_O4b4o0ZQmUq2S5siw_Cn3EE4Eu8M48
