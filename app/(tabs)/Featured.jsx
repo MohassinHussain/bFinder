@@ -22,7 +22,16 @@ export default function Featured() {
   ];
 
   return (
-    <ScrollView>
+    <ScrollView style={{ marginTop: hp(10) }}>
+      <Text
+        style={{
+          fontSize: hp(4),
+          textAlign: "center",
+          borderBottomWidth: hp(0.5),
+        }}
+      >
+        Featured
+      </Text>
       {featuredPlaces.map((place, index) => {
         return (
           <View

@@ -25,6 +25,7 @@ export default function TabLayout() {
             margin: wp(3),
             height: hp(5),
           },
+          headerShown: false,
         }}
       >
         <Tabs.Screen

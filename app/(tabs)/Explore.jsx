@@ -87,8 +87,22 @@ const Explore = () => {
 
   return (
     <>
-      <ScrollView style={{ flex: 1, margin: wp(3) }}>
-        <Text style={{ fontSize: hp(3), color: "#28231d" }}>
+      <ScrollView style={{ flex: 1, margin: wp(3), marginTop: hp(10) }}>
+        <Text
+          style={{
+            fontSize: hp(4),
+            textAlign: "center",
+            borderBottomWidth: hp(0.5),
+          }}
+        >
+          Explore
+        </Text>
+        <Text
+          style={{
+            fontSize: hp(3),
+            color: "#28231d",
+          }}
+        >
           Note: Your name ({user.fullName}) will be visible to everyone if you
           add a place.
         </Text>
