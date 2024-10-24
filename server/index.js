@@ -89,7 +89,7 @@ app.get("/", (req, res) => {
   res.send("HELLO");
 });
 
-const GEMINI = "AIzaSyDO3qcW52EXdNQlRAtGw8ihPUr9qaCiDww";
+const GEMINI = "";
 
 // Search route
 app.post("/search", async (req, res) => {
