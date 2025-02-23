@@ -1,3 +1,3 @@
-# Welcome to your Expo app 👋
+# Welcome to bFinder 👋
 
 
