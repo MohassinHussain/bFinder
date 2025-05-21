@@ -39,4 +39,4 @@ The app was created to assist startups and small businesses by providing data-dr
 
 ---
 
-🔗 [LinkedIn](https://linkedin.com/in/mohassinhussain) • [Portfolio](https://mohassinhussainbmd.vercel.app) • [GitHub](https://github.com/MohassinHussain)
+🔗 [LinkedIn](https://linkedin.com/in/mohassinhussain) • [Portfolio](https://bmhs.vercel.app) • [GitHub](https://github.com/MohassinHussain)
